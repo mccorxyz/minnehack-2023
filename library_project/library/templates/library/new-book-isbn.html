@@ -1,0 +1,26 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>New Book Manual Entry</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+{% extends "base.html" %}
+
+{% block title %}New Meeting{% endblock %}
+
+{% block content %}
+<h1>Plan a new meeting</h1>
+<form method="post">
+  <table>
+    {{ bookForm }}
+  </table>
+  {% csrf_token %}
+  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Create</button>
+</form>
+{% endblock %}
