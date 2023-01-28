@@ -46,7 +46,7 @@ class ISBNLookup:
         # filtered_dict = {k: v for k, v in rbd.iteritems() if filter_string in k}
 
 
-        return rbd["volumeInfo"]["title"]
+        return rbd["volumeInfo"]
 
 if __name__ == "__main__":
     print(ISBNLookup().lookup(input("enter isbn")))
