@@ -11,7 +11,8 @@ cd meeting_planner/
 
 python manage.py startapp website
 
-python manage.py runserver
+### Run the webserver
+```python manage.py runserver```
 
 ## Migrations
 
@@ -40,3 +41,6 @@ https://docs.djangoproject.com/en/4.1/ref/models/fields/
 4. Run Migrations
     - `python manage.py migrate`
 
+### Useful Colors
+
+https://coolors.co/386641-6a994e-a7c957-f2e8cf-bc4749
