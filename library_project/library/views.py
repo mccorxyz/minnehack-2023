@@ -10,6 +10,10 @@ def library(request):
 def new_user(request):
     return render(request, "library/new-user.html")
 
+def new_book(request):
+    return render(request, "library/new-book.html", {"ISBNForm": ISBNAddBookForm(), "manualForm": ManualAddBookForm()})
+
+
 def new_book_manual(request):
     if request.method == "POST":
         bookForm = ManualAddBookForm(request.POST)
@@ -25,11 +29,7 @@ def new_book_manual(request):
                 bookForm.save()
                 messages.info(request, "Added {} to your library".format(bookForm.cleaned_data["title"]))
 
-            return redirect("newBookISBN", )
-    else:
-        bookForm = ISBNAddBookForm()
-
-    return render(request, "library/new-book-manual.html", {"bookForm": bookForm})
+    return redirect("newBook",)
 
 def new_book_isbn(request):
     if request.method == "POST":
@@ -53,11 +53,7 @@ def new_book_isbn(request):
                     Book(**bookDict).save()
                     messages.info(request, "Added {} to your library".format(bookDict["title"]))
 
-
-            return redirect("newBookISBN", )
-    else:
-        bookForm = ISBNAddBookForm()
-    return render(request, "library/new-book-isbn.html", {"form": bookForm})
+    return redirect("newBook", )
 
 def check_in(request):
     return render(request, "library/check-in.html")
