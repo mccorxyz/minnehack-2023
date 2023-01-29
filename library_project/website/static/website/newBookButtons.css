@@ -46,12 +46,12 @@
 .barCodeIcon {
     display: flex;
     flex-direction: column;
-
+    margin-top: 60px;
 }
 
 .line {
     height: 100px;
-    background-color: #D9D9D9;
+    background-color: black;
 }
 
 .topHalf {
@@ -67,10 +67,6 @@
 .topLine {
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
-}
-
-.middleLine {
-
 }
 
 .bottomLine {
