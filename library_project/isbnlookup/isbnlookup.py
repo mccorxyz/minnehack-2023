@@ -58,6 +58,7 @@ class ISBNLookup:
             "averageRating": b_obj["volumeInfo"]["averageRating"],
             "thumbnail": b_obj["volumeInfo"]["imageLinks"]["thumbnail"],
             "publicDomain": b_obj["accessInfo"]["publicDomain"],
+            "quantity": 1,
         }
         # rbd = obj["items"][0]
         # authors = obj["items"][0]["volumeInfo"]["authors"]

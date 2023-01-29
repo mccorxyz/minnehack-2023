@@ -21,9 +21,16 @@ def new_book_isbn(request):
                 # Do error
                 messages.info(request, "Error, could not add book")
             else:
-                print(str(bookDict))
-                Book(**bookDict).save()
-                messages.info(request, "Added book!")
+                # print(str(bookDict))
+                existingBookList = Book.objects.filter(isbn=bookForm.cleaned_data["isbn"])
+                if len(existingBookList) > 0:
+                    mBook = existingBookList[0]
+                    mBook.quantity += 1
+                    messages.info(request, "You now have {} copies of {}".format(mBook.quantity, mBook.title))
+                    mBook.save()
+                else:
+                    Book(**bookDict).save()
+                    messages.info(request, "Added {} to your library".format(bookDict["title"]))
 
             return redirect("newBookISBN", )
     else:
