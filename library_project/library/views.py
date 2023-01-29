@@ -4,6 +4,12 @@ from django.contrib import messages
 from .forms import *
 
 # Create your views here.
+def home(request):
+    checkInForm = CheckInForm()
+    checkOutForm = CheckOutForm()
+    return render(request, "library/home.html", {"checkInForm": checkInForm,
+                                                 "checkOutForm": checkOutForm})
+
 def library(request):
     return render(request, "library/library.html")
 
