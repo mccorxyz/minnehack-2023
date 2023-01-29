@@ -1,6 +1,10 @@
-html, body {
+html, body, .modal-content {
 	background-color: #F2E8CF;
 	font-family: 'Rubik', sans-serif;
+}
+
+.btn-primary {
+    background-color: #6A994E;
 }
 
 nav, footer {
@@ -9,4 +13,8 @@ nav, footer {
 
 th > a {
     color: #FFFFFF;
+}
+
+.icon {
+filter: invert(99%) sepia(39%) saturate(2433%) hue-rotate(17deg) brightness(89%) contrast(73%);
 }

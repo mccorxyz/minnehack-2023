@@ -121,3 +121,27 @@
     font-size: 55px;
 }
 }
+
+@media screen and (max-width: 500px) {
+    .cornerBook {
+        display: none;
+    }
+    .cornerCircle {
+        margin-top: 50px;
+        width: 200px;
+        height: 125px;
+    }
+    .textBox {
+        display: none;
+    }
+    .checkOutButton {
+        border-top-right-radius: 100px;
+    }
+    .returnButton {
+        border-top-left-radius: 100px;
+    }
+    .buttons {
+        margin-left: 2.5px;
+        margin-right: 2.5px;
+    }
+    }
