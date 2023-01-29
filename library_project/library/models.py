@@ -39,4 +39,4 @@ class Book(models.Model):
 class User(models.Model):
     name = models.CharField(max_length=100)
     isbns = models.JSONField(default=list)
-    card_id = models.CharField(max_length=50)
+    card_id = models.CharField(max_length=50, verbose_name="Library Card Number")
