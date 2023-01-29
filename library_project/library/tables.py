@@ -4,5 +4,8 @@ from .models import Book
 class BookTable(tables.Table):
     class Meta:
         model = Book
-        attrs = {"class": "table",}
+        attrs = {"class": "table",
+                 'thead': {
+                     'class': 'thead-dark'
+                 }}
         fields = ("id", "title", "authors", "quantity")

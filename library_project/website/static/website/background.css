@@ -2,3 +2,11 @@ html, body {
 	background-color: #F2E8CF;
 	font-family: 'Rubik', sans-serif;
 }
+
+nav, footer {
+    font-weight: 500;
+}
+
+th > a {
+    color: #FFFFFF;
+}
