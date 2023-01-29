@@ -1,16 +1,7 @@
 #!/usr/bin/python3
 
 import urllib.request
-# import requests
 import json
-import textwrap
-
-# from http import cookiejar  # Python 2: import cookielib as cookiejar
-#
-# class BlockAll(cookiejar.CookiePolicy):
-#     return_ok = set_ok = domain_return_ok = path_return_ok = lambda self, *args, **kwargs: False
-#     netscape = True
-#     rfc2965 = hide_cookie2 = False
 
 class ISBNLookup:
 
@@ -42,39 +33,73 @@ class ISBNLookup:
 
         b_obj = obj["items"][0]
 
-        # print("b_obj: {}".format(b_obj))
+        try:
+            m_title = b_obj["volumeInfo"]["title"]
+        except KeyError as e:
+            m_title = ""
+        try:
+            m_authors = b_obj["volumeInfo"]["authors"],
+        except KeyError as e:
+            m_authors = []
+        try:
+            m_subtitle = b_obj["volumeInfo"]["subtitle"],
+        except KeyError as e:
+            m_subtitle = ""
+        try:
+            m_publisher = b_obj["volumeInfo"]["publisher"]
+        except KeyError as e:
+            m_publisher = ""
+        try:
+            m_publishedDate = b_obj["volumeInfo"]["publishedDate"]
+        except KeyError as e:
+            m_publishedDate = ""
+        try:
+            m_description = b_obj["volumeInfo"]["description"]
+        except KeyError as e:
+            m_description = ""
+        try:
+            m_pageCount = b_obj["volumeInfo"]["pageCount"]
+        except KeyError as e:
+            m_pageCount = 0
+        try:
+            m_categories = b_obj["volumeInfo"]["categories"]
+        except KeyError as e:
+            m_categories = []
+        try:
+            m_maturityRating = b_obj["volumeInfo"]["maturityRating"]
+        except KeyError as e:
+            m_maturityRating = "NOT_MATURE"
+        try:
+            m_averageRating = b_obj["volumeInfo"]["averageRating"]
+        except KeyError as e:
+            m_averageRating = 0
+        try:
+            m_thumbnail = b_obj["volumeInfo"]["imageLinks"]["thumbnail"]
+        except KeyError as e:
+            m_thumbnail = ""
+        try:
+            m_publicDomain = b_obj["accessInfo"]["publicDomain"]
+        except KeyError as e:
+            m_publicDomain = "false"
+
 
         b_dict = {
-            "title": b_obj["volumeInfo"]["title"],
-            "authors": b_obj["volumeInfo"]["authors"],
-            "subtitle": b_obj["volumeInfo"]["title"],
-            "publisher": b_obj["volumeInfo"]["publisher"],
-            "publishedDate": b_obj["volumeInfo"]["publishedDate"],
-            "description": b_obj["volumeInfo"]["description"],
+            "title": m_title,
+            "authors": m_authors,
+            "subtitle": m_subtitle,
+            "publisher": m_publisher,
+            "publishedDate": m_publishedDate,
+            "description": m_description,
             "isbn": isbn_num,
-            "pageCount": b_obj["volumeInfo"]["pageCount"],
-            "categories": b_obj["volumeInfo"]["categories"],
-            "maturityRating": b_obj["volumeInfo"]["maturityRating"],
-            "averageRating": b_obj["volumeInfo"]["averageRating"],
-            "thumbnail": b_obj["volumeInfo"]["imageLinks"]["thumbnail"],
-            "publicDomain": b_obj["accessInfo"]["publicDomain"],
+            "pageCount": m_pageCount,
+            "categories": m_categories,
+            "maturityRating": m_maturityRating,
+            "averageRating": m_averageRating,
+            "thumbnail": m_thumbnail,
+            "publicDomain": m_publicDomain,
             "quantity": 1,
         }
-        # rbd = obj["items"][0]
-        # authors = obj["items"][0]["volumeInfo"]["authors"]
 
-        # displays title, summary, author, domain, page count and language
-        # print("\nTitle:", rbd["volumeInfo"]["title"])
-        # print("\nSummary:\n")
-        # print(textwrap.fill(book_info["searchInfo"]["textSnippet"], width=65))
-        # print("\nAuthor(s):", ",".join(authors))
-
-        # print("\n***")
-        # return [book_info["volumeInfo"]["title"]] + obj["items"][0]["volumeInfo"]["authors"]
-
-        # filtered_dict = {k: v for k, v in rbd.iteritems() if filter_string in k}
-
-        # print("about to return")
         return b_dict
 
 if __name__ == "__main__":

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Library{% endblock %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'website/background.css' %}">
+
+<div class="container">
+	
+
+<h1 class="text-center">User Books</h1>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Status</th>
+      <th scope="col">Student</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Test1</td>
+      <td>Checked Out</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Test2</td>
+      <td>Available</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Test3</td>
+      <td>Checkout Out</td>
+      <td>test</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+{% bootstrap_messages %}
+
+{% endblock %}

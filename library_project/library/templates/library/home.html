@@ -31,7 +31,7 @@ $(document).ready(function(){
       </div>
     </div>
     <div class="textBox">
-      Check Out A Book
+      Check Out
     </div>
   </button>
   <button class="returnButton buttons" data-toggle="modal" data-target="#manualModal">
@@ -43,7 +43,7 @@ $(document).ready(function(){
       </div>
     </div>
     <div class="textBox">
-      Return A Book
+      Return
     </div>
   </button>
 </div>
@@ -59,9 +59,9 @@ $(document).ready(function(){
         </button>
       </div>
       <div class="modal-body">
-		  <form method="post" class="form">
+		  <form method="post" action="/library/check-out" class="form">
 			  {% csrf_token %}
-			  {% bootstrap_form checkInForm %}
+			  {% bootstrap_form checkOutForm %}
 			  <div class="modal-footer">
 			  {% bootstrap_button button_type="submit" content="Submit" %}
 			  </div>
@@ -83,15 +83,18 @@ $(document).ready(function(){
       </div>
 
       <div class="modal-body">
-      	<form method="post" class="form">
+      	<form method="post" action="/library/check-in" class="form">
 			  {% csrf_token %}
-			  {% bootstrap_form checkOutForm %}
+			  {% bootstrap_form checkInForm %}
+              <div class="modal-footer">
+			  {% bootstrap_button button_type="submit" content="Submit" %}
+			  </div>
 	  	</form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
-      </div>
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--        <button type="button" class="btn btn-primary">Submit</button>-->
+<!--      </div>-->
     </div>
   </div>
 </div>
