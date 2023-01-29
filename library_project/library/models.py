@@ -12,9 +12,11 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=100)
     subtitle = models.CharField(max_length=300)
-    authors = models.ManyToManyField(Author)
+    # authors = models.ManyToManyField(Author)
+    authors = models.JSONField()
     publisher = models.CharField(max_length=100)
-    publishedDate = models.DateField
+    # publishedDate = models.DateField
+    publishedDate = models.CharField(max_length=20)
     description = models.CharField(max_length=500)
     isbn = models.CharField(max_length=13)
     pageCount = models.IntegerField(default=0,
@@ -29,7 +31,7 @@ class Book(models.Model):
                                             MinValueValidator(0),
                                             MaxValueValidator(5)
                                         ])
-    maturity = models.CharField(max_length=100)
+    maturityRating = models.CharField(max_length=100)
     thumbnail = models.CharField(max_length=200)
     publicDomain = models.BooleanField()
     quantity = models.IntegerField(default=0,
