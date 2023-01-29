@@ -10,7 +10,7 @@ class  AuthorColumn(tables.Column):
     def render(self, value):
         res = ''
         for author in value:
-            res += res + str(author) + ','
+            res += str(author[0]) + ','
         return res[:-1]
 
 class BookTable(tables.Table):
