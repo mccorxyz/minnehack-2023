@@ -6,8 +6,8 @@ from django.forms import ModelForm, DateInput, TimeInput, TextInput, IntegerFiel
 from django.core.exceptions import ValidationError
 
 # Create your models here.
-class Author(models.Model):
-    name = models.CharField(max_length=100)
+# class Author(models.Model):
+#     name = models.CharField(max_length=100)
 
 class Book(models.Model):
     title = models.CharField(max_length=100)

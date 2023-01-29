@@ -11,7 +11,25 @@ def new_user(request):
     return render(request, "library/new-user.html")
 
 def new_book_manual(request):
-    return render(request, "library/new-book-manual.html")
+    if request.method == "POST":
+        bookForm = ManualAddBookForm(request.POST)
+        if bookForm.is_valid():
+            print(bookForm.cleaned_data["title"])
+            existingBookList = Book.objects.filter(title=bookForm.cleaned_data["title"])
+            if len(existingBookList) > 0:
+                mBook = existingBookList[0]
+                mBook.quantity += 1
+                messages.info(request, "You now have {} copies of {}".format(mBook.quantity, mBook.title))
+                mBook.save()
+            else:
+                bookForm.save()
+                messages.info(request, "Added {} to your library".format(bookForm.cleaned_data["title"]))
+
+            return redirect("newBookISBN", )
+    else:
+        bookForm = ISBNAddBookForm()
+
+    return render(request, "library/new-book-manual.html", {"bookForm": bookForm})
 
 def new_book_isbn(request):
     if request.method == "POST":
