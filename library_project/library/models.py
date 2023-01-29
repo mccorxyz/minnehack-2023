@@ -35,6 +35,7 @@ class Book(models.Model):
     thumbnail = models.CharField(max_length=200)
     publicDomain = models.BooleanField()
     quantity = models.IntegerField(default=0,
+                                   verbose_name="Copies",
                                    validators=[
                                        MinValueValidator(0)
                                    ])
