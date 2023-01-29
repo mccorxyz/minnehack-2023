@@ -24,7 +24,7 @@ class Book(models.Model):
     #                                         MinValueValidator(0),
     #                                         MaxValueValidator(5)
     #                                     ])
-    maturity = models.CharField(max_length=100)
+    maturityRating = models.CharField(max_length=100)
     thumbnail = models.CharField(max_length=200)
     publicDomain = models.BooleanField()
 

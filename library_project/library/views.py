@@ -15,10 +15,17 @@ def new_book_isbn(request):
         bookForm = ISBNAddBookForm(request.POST)
         if bookForm.is_valid():
             print(bookForm.cleaned_data["isbn"])
-            # ISBNLookup().lookup(bookForm.cleaned_data["isbn"])
-            messages.info(request, "Adding book!")
-            # bookForm.save()
-            return redirect("library", )
+            bookDict = ISBNLookup().lookup(bookForm.cleaned_data["isbn"])
+
+            if bookDict is None:
+                # Do error
+                messages.info(request, "Error, could not add book")
+            else:
+                print(str(bookDict))
+                Book(**bookDict).save()
+                messages.info(request, "Added book!")
+
+            return redirect("newBookISBN", )
     else:
         bookForm = ISBNAddBookForm()
     return render(request, "library/new-book-isbn.html", {"bookForm": bookForm})
