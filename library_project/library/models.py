@@ -39,7 +39,7 @@ class Book(models.Model):
                                        MinValueValidator(0)
                                    ])
 
-class Student(models.Model):
+class User(models.Model):
     name = models.CharField(max_length=100)
     isbns = models.JSONField()
 

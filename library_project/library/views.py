@@ -7,6 +7,9 @@ from .forms import *
 def library(request):
     return render(request, "library/library.html")
 
+def new_user(request):
+    return render(request, "library/new-user.html")
+
 def new_book_manual(request):
     return render(request, "library/new-book-manual.html")
 

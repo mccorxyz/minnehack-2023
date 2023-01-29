@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path
 
 from website.views import home
-from library.views import library, new_book_isbn, new_book_manual, check_in, check_out
+from library.views import library, new_book_isbn, new_book_manual, check_in, check_out, new_user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name="home"),
     path('library', library, name="library"),
+    path('newuser', new_user, name="newUser"),
     path('library/new', new_book_isbn, name="newBookISBN"),
     path('library/new/manual', new_book_manual, name="newBookManual"),
     path('library/check-in', check_in, name="checkIn"),
