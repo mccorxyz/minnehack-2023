@@ -12,5 +12,10 @@ def post_new_book(request, isbn):
         if bookDict is None:
             return JsonResponse({"success": "false"})
         else:
-            Book(**bookDict).save()
+            book = Book.objects.filter(isbn=isbn)
+            if len(book) == 0:
+                Book(**bookDict).save()
+            else:
+                book[0].quantity += 1
+                book[0].save()
             return JsonResponse({"success": "true"})
