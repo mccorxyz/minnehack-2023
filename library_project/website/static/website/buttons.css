@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-
-    margin-top: 12.5%;
+    
+    margin-top: 5%;
 }
 
 .buttons {
@@ -15,7 +15,7 @@
     align-items: center;
 
     background-color: #BC4749;
-    height: 400px;
+    min-height: 400px;
     width: 600px;
     margin-left: 5%;
     margin-right: 5%;
@@ -114,4 +114,10 @@
     height: 35px;
 
     margin-bottom: 10px;
+}
+
+@media screen and (max-width: 800px) {
+.textBox {
+    font-size: 55px;
+}
 }
