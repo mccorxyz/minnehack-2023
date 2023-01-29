@@ -14,9 +14,18 @@
 		
 		<h1>Scan Barcode to Check Out Book</h1>
 
-		<input type="text" name="" class="form-control" id="barcode">
+<!--		<input type="text" name="" class="form-control" id="userId">-->
 
-		<button class="btn btn-primary mt-2" type="button">Submit</button>
+<!--		<input type="text" name="" class="form-control" id="barcode">-->
+
+<!--		<button class="btn btn-primary mt-2" type="button">Submit</button>-->
+		<form method="POST">
+			<table>
+				{{ form }}
+			</table>
+			{% csrf_token %}
+			<button class="btn btn-primary mt-2" type="button">Submit</button>
+		</form>
 
 	</div>
 	<div class="col-2"></div>
@@ -27,7 +36,7 @@
 </div>
 
 <script type="text/javascript">
-	var input = document.getElementById('barcode');
+var input = document.getElementById('barcode');
 input.focus();
 input.select();
 

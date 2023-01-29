@@ -27,4 +27,10 @@ def check_in(request):
     return render(request, "library/check-in.html")
 
 def check_out(request):
-    return render(request, "library/check-out.html")
+    if request.method == "POST":
+        checkOutForm = CheckOutForm(request.POST)
+        if checkOutForm.is_valid():
+            print('hello')
+    else:
+        checkOutForm = CheckOutForm()
+    return render(request, "library/check-out.html", {"form": checkOutForm})
