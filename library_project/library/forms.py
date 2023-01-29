@@ -1,6 +1,6 @@
 from django.forms import ModelForm, DateInput, TextInput
 from django import forms
-from .models import Book
+from .models import Book, User
 
 
 class ManualAddBookForm(ModelForm):
@@ -18,7 +18,12 @@ class ISBNAddBookForm(ModelForm):
         fields = ("isbn",)
 
 class CheckOutForm(forms.Form):
-    userId = forms.CharField()
-    isbn = forms.CharField()
+    card_id = forms.CharField()
+    isbns = forms.CharField()
     class Meta:
-        fields = ["userId", "isbn"]
+        fields = ["card_id", "isbn",]
+
+# class CheckoutBookForm(ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ("isbns", "card_id",)

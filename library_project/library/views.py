@@ -56,13 +56,29 @@ def new_book_isbn(request):
     return redirect("newBook", )
 
 def check_in(request):
+
+
     return render(request, "library/check-in.html")
 
 def check_out(request):
     if request.method == "POST":
         checkOutForm = CheckOutForm(request.POST)
         if checkOutForm.is_valid():
-            print('hello')
+            print(checkOutForm.cleaned_data["card_id"])
+            print(checkOutForm.cleaned_data["isbns"][0])
+            desiredBookList = Book.objects.filter(isbn=checkOutForm.cleaned_data["isbns"][0])
+            if len(desiredBookList) > 0:
+                userList = User.objects.filter(card_id=checkOutForm.cleaned_data["card_id"])
+                if len(userList) > 0:
+                    userList.isbns += checkOutForm.cleaned_data["isbns"]
+                    userList.save()
+                    messages.info(request, "Checkout out {} to {}".format(desiredBookList[0]["title"], userList[0]["name"]))
+                else:
+                    messages.info(request, "Invalid card id")
+
+            else:
+                messages.info(request, "Book with entered ISBN is not in your library")
+        return redirect("checkOut")
     else:
         checkOutForm = CheckOutForm()
     return render(request, "library/check-out.html", {"form": checkOutForm})
