@@ -6,16 +6,12 @@ from django.forms import ModelForm, DateInput, TimeInput, TextInput, IntegerFiel
 from django.core.exceptions import ValidationError
 
 # Create your models here.
-# class Author(models.Model):
-#     name = models.CharField(max_length=100)
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
     subtitle = models.CharField(max_length=300)
-    # authors = models.ManyToManyField(Author)
     authors = models.JSONField()
     publisher = models.CharField(max_length=100)
-    # publishedDate = models.DateField
     publishedDate = models.CharField(max_length=20)
     description = models.CharField(max_length=500)
     isbn = models.CharField(max_length=13)
@@ -44,5 +40,3 @@ class User(models.Model):
     name = models.CharField(max_length=100)
     isbns = models.JSONField(default=list)
     card_id = models.CharField(max_length=50)
-
-

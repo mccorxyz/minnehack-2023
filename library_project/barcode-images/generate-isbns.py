@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
-from io import BytesIO
+"""
+This script will generate ISBN barcodes from the raw numbers.
+"""
 
 from barcode import ISBN13
 from barcode.writer import SVGWriter

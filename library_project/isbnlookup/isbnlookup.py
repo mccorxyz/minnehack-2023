@@ -4,23 +4,41 @@ import urllib.request
 import json
 
 class ISBNLookup:
+    """
+    This class uses the Google Book API to populate relevant book information given a single ISBN number. The API
+    doesn't always find a match for the ISBN, and sometimes the data it returns isn't completely filled out.
+    """
 
     def __init__(self):
         pass
 
     def lookup(self, isbn_num:str):
         """
-        Given an ISBN number (ISBN 10 or 13), return a dictionary object:
-        TODO figure out dict structure
-        :param isbn_num:
-        :return:
+        Given an ISBN number (ISBN 10 or 13), return None if no book is found for a given ISBN, or returns
+        a dictionary of the following structure:
+            "title": m_title,
+            "authors": m_authors,
+            "subtitle": m_subtitle,
+            "publisher": m_publisher,
+            "publishedDate": m_publishedDate,
+            "description": m_description,
+            "isbn": isbn_num,
+            "pageCount": m_pageCount,
+            "categories": m_categories,
+            "maturityRating": m_maturityRating,
+            "averageRating": m_averageRating,
+            "thumbnail": m_thumbnail,
+            "publicDomain": m_publicDomain,
+            "quantity": 1,
+        :param isbn_num: a 10 or 13 numeric string to use for querying
+        :return: None or a dict of the above structure.
         """
 
         base_api_link = "https://www.googleapis.com/books/v1/volumes?q=isbn:"
 
         print(base_api_link + isbn_num)
 
-        with urllib.request.urlopen(base_api_link + isbn_num) as f:
+        with urllib.request.urlopen(base_api_link + isbn_num) as f: # our query to the google books api
             text = f.read()
 
 

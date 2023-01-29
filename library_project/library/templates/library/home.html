@@ -48,40 +48,39 @@ $(document).ready(function(){
   </button>
 </div>
 
-<!-- Scan Modal -->
-<div class="modal fade" id="scanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Left Checkout Modal -->
+<div class="modal fade" id="scanModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Scan Barcode</h5>
+        <h5 class="modal-title" id="checkoutModal">Scan Barcode</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-		  <form method="post" action="/library/check-out" class="form">
-			  {% csrf_token %}
-			  {% bootstrap_form checkOutForm %}
-			  <div class="modal-footer">
-			  {% bootstrap_button button_type="submit" content="Submit" %}
-			  </div>
-		  </form>
+          <form method="post" action="/library/check-out" class="form">
+              {% csrf_token %}
+              {% bootstrap_form checkOutForm %}
+              <div class="modal-footer">
+              {% bootstrap_button button_type="submit" content="Submit" %}
+              </div>
+          </form>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Manual Modal -->
-<div class="modal fade" id="manualModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Right Checkin Modal -->
+<div class="modal fade" id="manualModal" tabindex="-1" role="dialog" aria-labelledby="checkinModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Enter Book Data</h5>
+        <h5 class="modal-title" id="checkinModal">Enter Book Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
       <div class="modal-body">
       	<form method="post" action="/library/check-in" class="form">
 			  {% csrf_token %}
@@ -91,10 +90,6 @@ $(document).ready(function(){
 			  </div>
 	  	</form>
       </div>
-<!--      <div class="modal-footer">-->
-<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--        <button type="button" class="btn btn-primary">Submit</button>-->
-<!--      </div>-->
     </div>
   </div>
 </div>

@@ -2,7 +2,9 @@ from django.forms import ModelForm, DateInput, TextInput
 from django import forms
 from .models import Book, User
 
-
+"""
+All post forms should live here. Separate post forms for each view.
+"""
 class ManualAddBookForm(ModelForm):
     class Meta:
         model = Book
@@ -46,9 +48,3 @@ class ViewUserBooksForm(forms.Form):
     card_id = forms.CharField(label="Library Card Number")
     class Meta:
         fields = ["card_id",]
-
-
-# class CheckoutBookForm(ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ("isbns", "card_id",)
