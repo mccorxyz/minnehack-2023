@@ -3,7 +3,7 @@
 {% load django_bootstrap5 %}
 
 <script type="text/javascript">
-	
+
 $('#myModal').on('shown.bs.modal', function () {
 	$('#myInput').trigger('focus')
 })
@@ -15,39 +15,38 @@ $(document).ready(function(){
 });
 
 </script>
-{% block title %}New Book{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'website/background.css' %}">
 <link rel="stylesheet" href="{% static 'website/buttons.css' %}">
+<link rel="stylesheet" href="{% static 'website/background.css' %}">
 
-	<h1 class="text-center">Insert New Book</h1>
-	
-
-			<div class="buttonContainer">
-		  <button class="checkOutButton buttons" data-toggle="modal" data-target="#scanModal">
-		    <div class="cornerCircle">
-		      <div class="cornerBook">
-		        <div class="iconTopArrow" style="border-bottom:30px solid blue;"></div>
-		        <div class="iconBottomArrow" style="background-color: blue;"></div>
-		        <div class="bottomIconBox"></div>
-		      </div>
-		    </div>
-		  </button>
-  
-		
-			<button class="returnButton buttons" data-toggle="modal" data-target="#manualModal">
-		    <div class="cornerCircle">
-		      <div class="cornerBook">
-		        <div class="iconTopArrow returnArrow" style="border-bottom:30px solid red;"></div>
-		        <div class="iconBottomArrow returnArrow" style="background-color: red;"></div>
-		        <div class="bottomIconBox"></div>
-		      </div>
-		    </div>
-		  </button>
-		  </div>
-
-		
+<div class="buttonContainer">
+  <button class="checkOutButton buttons" data-toggle="modal" data-target="#scanModal">
+    <div class="cornerCircle" style="align-self: flex-start;">
+      <div class="cornerBook">
+        <div class="iconTopArrow" style="border-bottom:30px solid blue;"></div>
+        <div class="iconBottomArrow" style="background-color: blue;"></div>
+        <div class="bottomIconBox"></div>
+      </div>
+    </div>
+    <div class="textBox">
+      Check Out A Book
+    </div>
+  </button>
+  <button class="returnButton buttons" data-toggle="modal" data-target="#manualModal">
+    <div class="cornerCircle" style="align-self: flex-end;">
+      <div class="cornerBook">
+        <div class="iconBottomArrow" style="background-color: red; margin-bottom: 0; margin-top: 5px;"></div>
+        <div class="iconArrowDown" style="border-top: 30px solid red;"></div>
+        <div class="bottomIconBox"></div>
+      </div>
+    </div>
+    <div class="textBox">
+      Return A Book
+    </div>
+  </button>
+</div>
 
 <!-- Scan Modal -->
 <div class="modal fade" id="scanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,9 +59,9 @@ $(document).ready(function(){
         </button>
       </div>
       <div class="modal-body">
-		  <form action="/library/new/isbn" method="post" class="form">
+		  <form method="post" class="form">
 			  {% csrf_token %}
-			  {% bootstrap_form ISBNForm %}
+			  {% bootstrap_form checkInForm %}
 			  <div class="modal-footer">
 			  {% bootstrap_button button_type="submit" content="Submit" %}
 			  </div>
@@ -71,7 +70,6 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
-
 
 <!-- Manual Modal -->
 <div class="modal fade" id="manualModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -85,9 +83,9 @@ $(document).ready(function(){
       </div>
 
       <div class="modal-body">
-      	<form action="/library/new/isbn" method="post" class="form">
+      	<form method="post" class="form">
 			  {% csrf_token %}
-			  {% bootstrap_form manualForm %}
+			  {% bootstrap_form checkOutForm %}
 	  	</form>
       </div>
       <div class="modal-footer">

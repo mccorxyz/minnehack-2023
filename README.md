@@ -11,7 +11,8 @@ cd meeting_planner/
 
 python manage.py startapp website
 
-python manage.py runserver
+### Run the webserver
+```python manage.py runserver```
 
 ## Migrations
 
