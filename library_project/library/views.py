@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect
 from isbnlookup.isbnlookup import ISBNLookup
 from django.contrib import messages
 from .forms import *
+from django.http import FileResponse
 
 from django_tables2 import SingleTableView
-from library.tables import BookTable
+from library.tables import BookTable, UserBookTable
+import pandas as pd
+import zipfile
+
 
 # Create your views here.
 class MyTableClass(SingleTableView):
@@ -43,22 +47,23 @@ def user_books(request):
                     mBook = Book.objects.filter(isbn=misbn)[0]
                     mBookList.append(mBook)
 
+                mTable = UserBookTable(mBookList)
 
-                return # TODO add table stuff above here and return
+                return render(request, "library/user-books.html", {"form": userBooksForm,
+                                                                  "table": mTable })
             else:
                 messages.info(request, "User does not exist")
         else:
             print("form is invalid")
 
 
-    return render(request, "library/user-books.html", {"ViewUserBooksForm": ViewUserBooksForm(),})
+    return render(request, "library/user-books.html", {"form": ViewUserBooksForm()})
 
 def library(request):
     return render(request, "library/library.html")
 
 def new_book(request):
     return render(request, "library/new-book.html", {"ISBNForm": ISBNAddBookForm(), "manualForm": ManualAddBookForm()})
-
 
 def new_book_manual(request):
     if request.method == "POST":
@@ -182,3 +187,29 @@ def check_out(request):
     # else:
     #     checkOutForm = CheckOutForm()
     # return render(request, "library/check-out.html", {"form": checkOutForm})
+
+def generate_report(request):
+    book_df = pd.DataFrame()
+    for mBook in Book.objects.all():
+        book_df = pd.concat([book_df, pd.DataFrame.from_dict(mBook.__dict__)])
+
+    user_df = pd.DataFrame()
+    for mUser in User.objects.all():
+
+        for index, misbn in enumerate(mUser.isbns):
+            mBook = Book.objects.filter(isbn=misbn)[0]
+            temp_df = pd.DataFrame.from_dict({"name": [mUser.name], "card_id": [mUser.card_id], "title": [mBook.title]})
+            print(temp_df)
+            user_df = pd.concat([user_df, temp_df])
+
+
+    f_book_df = book_df.filter(items=["title", "authors", "publisher", "publishedDate", "quantity"])
+    f_book_df.to_csv("all_books.csv")
+    print(user_df)
+    user_df.to_csv("users.csv")
+
+    with zipfile.ZipFile("report.zip", mode="w") as archive:
+        archive.write("all_books.csv")
+        archive.write("users.csv")
+
+    return FileResponse(open("report.zip", "rb"), as_attachment=True)
