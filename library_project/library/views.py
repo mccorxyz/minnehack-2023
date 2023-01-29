@@ -5,7 +5,7 @@ from .forms import *
 from django.http import FileResponse
 
 from django_tables2 import SingleTableView
-from library.tables import BookTable
+from library.tables import BookTable, UserBookTable
 import pandas as pd
 
 # Create your views here.
