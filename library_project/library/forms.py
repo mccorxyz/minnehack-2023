@@ -29,6 +29,11 @@ class CheckOutForm(forms.Form):
     class Meta:
         fields = ["card_id", "isbn",]
 
+class NewUserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ("name", "card_id")
+
 # class CheckoutBookForm(ModelForm):
 #     class Meta:
 #         model = User

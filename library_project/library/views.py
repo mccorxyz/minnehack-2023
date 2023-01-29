@@ -10,11 +10,21 @@ def home(request):
     return render(request, "library/home.html", {"checkInForm": checkInForm,
                                                  "checkOutForm": checkOutForm})
 
+def new_user(request):
+    if request.method == "POST":
+        newUserForm = NewUserForm(request.POST)
+        if newUserForm.is_valid():
+            existingUsers = User.objects.filter(card_id=newUserForm.cleaned_data["card_id"])
+            if len(existingUsers) > 0:
+                messages.info(request, "User with Id: {} already exists".format(newUserForm.cleaned_data["card_id"]))
+            else:
+                newUserForm.save()
+                messages.info(request, "Added {} to your library".format(newUserForm.cleaned_data["name"]))
+    newUserForm = NewUserForm()
+    return render(request, "library/new-user.html", {"form": newUserForm })
+
 def library(request):
     return render(request, "library/library.html")
-
-def new_user(request):
-    return render(request, "library/new-user.html")
 
 def new_book(request):
     return render(request, "library/new-book.html", {"ISBNForm": ISBNAddBookForm(), "manualForm": ManualAddBookForm()})
