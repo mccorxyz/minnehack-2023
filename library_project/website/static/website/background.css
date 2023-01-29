@@ -14,3 +14,7 @@ nav, footer {
 th > a {
     color: #FFFFFF;
 }
+
+.icon {
+filter: invert(99%) sepia(39%) saturate(2433%) hue-rotate(17deg) brightness(89%) contrast(73%);
+}
