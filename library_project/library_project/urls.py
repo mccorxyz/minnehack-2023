@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 # from website.views import home
-from library.views import MyTableClass, UserTableClass, home, library, new_book, new_book_isbn, new_book_manual, check_in, check_out, new_user, user_books, generate_report
+from library.views import MyTableClass, UserTableClass, home, library, new_book, new_book_isbn, new_book_manual, check_in, check_out, new_user, user_books, generate_report, import_csv
 from api.views import post_new_book
 
 urlpatterns = [
@@ -33,5 +33,6 @@ urlpatterns = [
     path('users', UserTableClass.as_view(), name="users"),
     path('library/user-books', user_books, name="userBooks"),
     path('library/generate-report', generate_report, name="generateReport"),
+    path('library/import-csv', import_csv, name="importCSV"),
     path('api/book/<str:isbn>', post_new_book, name="postnewbook"),
 ]

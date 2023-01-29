@@ -10,8 +10,15 @@ class AuthorColumn(tables.Column):
     def render(self, value):
         res = ''
         for author in value:
-            res += str(author[0]) + ','
-        return res[:-1]
+            if type(author) is list and len(author) > 0:
+                author = author[0]
+                print(author)
+            res += str(author) + ', '
+
+        if len(res) > 0 and res[:-2] == ", ":
+            return res[:-1]
+        else:
+            return res
 
 class BookTable(tables.Table):
     thumbnail = ImageColumn('Thumbnail')

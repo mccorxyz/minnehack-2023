@@ -9,32 +9,34 @@ from django.core.exceptions import ValidationError
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
-    subtitle = models.CharField(max_length=300)
-    authors = models.JSONField()
-    publisher = models.CharField(max_length=100)
-    publishedDate = models.CharField(max_length=20)
-    description = models.CharField(max_length=500)
-    isbn = models.CharField(max_length=13)
+    subtitle = models.CharField(max_length=300, blank=True, null=True)
+    authors = models.JSONField(blank=True, null=True)
+    publisher = models.CharField(max_length=100, blank=True, null=True)
+    publishedDate = models.CharField(max_length=20, blank=True, null=True)
+    description = models.CharField(max_length=500, blank=True, null=True)
+    isbn = models.CharField(max_length=13, blank=True, null=True)
     pageCount = models.IntegerField(default=0,
                                     validators=[
                                         MinValueValidator(0)
-                                    ])
-    categories = models.JSONField()
+                                    ], blank=True, null=True)
+    categories = models.JSONField(blank=True, null=True)
     averageRating = models.DecimalField(default=0,
                                         decimal_places=1,
                                         max_digits=2,
                                         validators=[
                                             MinValueValidator(0),
                                             MaxValueValidator(5)
-                                        ])
-    maturityRating = models.CharField(max_length=100)
-    thumbnail = models.CharField(max_length=200)
-    publicDomain = models.BooleanField()
+                                        ],
+                                        blank=True, null=True)
+    maturityRating = models.CharField(max_length=100, blank=True, null=True)
+    thumbnail = models.CharField(max_length=200, blank=True, null=True)
+    publicDomain = models.BooleanField(blank=True, null=True)
     quantity = models.IntegerField(default=0,
                                    verbose_name="Copies",
                                    validators=[
                                        MinValueValidator(0)
-                                   ])
+                                   ],
+                                   blank=True, null=True)
 
 class User(models.Model):
     name = models.CharField(max_length=100)
