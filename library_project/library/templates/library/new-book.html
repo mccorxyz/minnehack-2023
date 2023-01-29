@@ -1,22 +1,86 @@
 {% extends "base.html" %}
 {% load static %}
+
+<script type="text/javascript">
+	
+$('#myModal').on('shown.bs.modal', function () {
+	$('#myInput').trigger('focus')
+})
+
+</script>
 {% block title %}New Book{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'website/background.css' %}">
 
-<h1>Insert New Book</h1>
+<div class="container">
+	<h1 class="text-center">Insert New Book</h1>
+	
+	<div class="row">
 
-<form>
-  <div class="form-row">
-    <div class="col">
-      <input type="text" class="form-control" placeholder="First name">
-    </div>
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Last name">
+		<div class="col text-center">
+			
+			<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#scanModal">Scan</button>
+
+		</div>
+
+		<div class="col text-center">
+			
+			<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#manualModal">Enter Manually</button>
+		</div>
+		
+	</div>
+
+</div>
+
+<!-- Scan Modal -->
+<div class="modal fade" id="scanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Scan Barcode</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" placeholder="Scan Id...">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
     </div>
   </div>
-</form>
+</div>
+
+
+<!-- Manual Modal -->
+<div class="modal fade" id="manualModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter Book Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control mt-2" placeholder="Title">
+        <input type="text" class="form-control mt-2" placeholder="test">
+        <input type="text" class="form-control mt-2" placeholder="test">
+        <input type="text" class="form-control mt-2" placeholder="test">
+        <input type="text" class="form-control mt-2" placeholder="test">
+        <input type="text" class="form-control mt-2" placeholder="test">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 {% endblock %}
