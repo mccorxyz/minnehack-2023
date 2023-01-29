@@ -12,7 +12,7 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=100)
     subtitle = models.CharField(max_length=300)
-    author = models.ManyToManyField(Author)
+    authors = models.ManyToManyField(Author)
     publisher = models.CharField(max_length=100)
     publishedDate = models.DateField
     description = models.CharField(max_length=500)

@@ -46,7 +46,7 @@ class ISBNLookup:
 
         b_dict = {
             "title": b_obj["volumeInfo"]["title"],
-            "author": b_obj["volumeInfo"]["author"],
+            "authors": b_obj["volumeInfo"]["authors"],
             "subtitle": b_obj["volumeInfo"]["title"],
             "publisher": b_obj["volumeInfo"]["publisher"],
             "publishedDate": b_obj["volumeInfo"]["publishedDate"],
