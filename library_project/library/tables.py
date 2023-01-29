@@ -1,6 +1,6 @@
 import django_tables2 as tables
 from django.utils.html import format_html
-from .models import Book
+from .models import Book, User
 
 class ImageColumn(tables.Column):
     def render(self, value):
@@ -34,3 +34,12 @@ class UserBookTable(tables.Table):
                      'class': 'thead-dark'
                  }}
         fields = ("thumbnail", "title", "authors")
+
+class UserTable(tables.Table):
+    class Meta:
+        model = User
+        attrs = {"class": "table",
+                 'thead': {
+                     'class': 'thead-dark'
+                 }}
+        fields = ("name", "card_id")
