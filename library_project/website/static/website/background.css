@@ -1,6 +1,10 @@
-html, body {
+html, body, .modal-content {
 	background-color: #F2E8CF;
 	font-family: 'Rubik', sans-serif;
+}
+
+.btn-primary {
+    background-color: #6A994E;
 }
 
 nav, footer {
