@@ -6,13 +6,22 @@
     margin-top: 12.5%;
 }
 
-.checkOutButton {
+.buttons {
+    display: flex;
+    border-color: black;
+    border-width: 10px;
+    padding: 0px;
+
     background-color: #BC4749;
-    border: none;
     height: 400px;
     width: 600px;
     margin-left: 5%;
     margin-right: 5%;
+    padding: none;
+}
+
+.checkOutButton {
+    border-top-left-radius: 100px;
 }
 
 .checkOutButton:hover {
@@ -20,14 +29,78 @@
 }
 
 .returnButton {
-    background-color: #BC4749;
-    border: none;
-    height: 400px;
-    width: 600px;
-    margin-left: 5%;
-    margin-right: 5%;
+    border-top-right-radius: 100px;
 }
 
 .returnButton:hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24);
+}
+
+.cornerCircle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #A7C957;
+    margin: none;
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+
+    border: solid;
+    border-color: black;
+    border-width: 10px;
+}
+
+.cornerBook {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+    background: white;
+    width: 75px;
+    height: 100px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    border: solid;
+    border-color: black;
+    border-width: 10px;
+}
+
+.bottomIconBox {
+    background: black;
+    width: 60px;
+    height: 10px;
+}
+
+.iconTopArrow {
+    width: 0px;
+    height: 0px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+
+    border-bottom: 30px solid;
+
+    margin-top: 5px;
+}
+
+.iconArrowDown {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    
+    border-top: 30px solid;
+
+    margin-bottom: 5px;
+}
+
+.iconBottomArrow {
+    background: black;
+    width: 15px;
+    height: 35px;
+
+    margin-bottom: 10px;
 }
