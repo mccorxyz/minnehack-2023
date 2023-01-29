@@ -10,7 +10,7 @@ from library.tables import BookTable
 class MyTableClass(SingleTableView):
     table_class = BookTable
     queryset = Book.objects.all()
-    template_name = "tables/table.html"
+    template_name = "tables/catalog.html"
 
 def home(request):
     checkInForm = CheckInForm()
