@@ -18,10 +18,10 @@ class ISBNAddBookForm(ModelForm):
         fields = ("isbn",)
 
 class CheckInForm(forms.Form):
-    userId = forms.CharField()
+    card_id = forms.CharField()
     isbn = forms.CharField()
     class Meta:
-        fields = ["userId", "isbn"]
+        fields = ["card_id", "isbn",]
 
 class CheckOutForm(forms.Form):
     card_id = forms.CharField()

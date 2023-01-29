@@ -64,10 +64,49 @@ def check_in(request):
     if request.method == "POST":
         checkInForm = CheckInForm(request.POST)
         if checkInForm.is_valid():
-            print('hello')
-    else:
-        checkInForm = CheckInForm()
-    return render(request, "library/check-in.html", { "form": checkInForm })
+            print("form is valid")
+            print(checkInForm.cleaned_data["card_id"])
+            print(checkInForm.cleaned_data["isbn"])
+            desiredBookList = Book.objects.filter(isbn=checkInForm.cleaned_data["isbn"])
+            print("desiredBookList: {}".format(desiredBookList))
+            if len(desiredBookList) > 0:
+                mBook = desiredBookList[0]
+                userList = User.objects.filter(card_id=checkInForm.cleaned_data["card_id"])
+                if len(userList) > 0:
+                    mUser = userList[0]
+                    if mUser.isbns.__contains__(checkInForm.cleaned_data["isbn"]):
+                        mUser.isbns.remove(mBook.isbn)
+                        mUser.save()
+                        mBook.quantity += 1
+                        mBook.save()
+                        messages.info(request, "Returned {}".format(mBook.title))
+                        print("Returned {}".format(mBook.title))
+                    else:
+                        messages.info(request, "{} has not checked out {}".format(mUser.name, mBook.title))
+                else:
+                    messages.info(request, "Invalid card id")
+                    print("invalid card id")
+            else:
+                messages.info(request, "Book with entered ISBN is not in your library")
+                print("book with entered ISBN is not in your library")
+        else:
+            print("form is invalid")
+    print("redirecting to home")
+    return redirect("home")
+    # else:
+    #     checkInForm = CheckOutForm()
+    # return render(request, "library/check-in.html", {"form": checkInForm})
+
+
+
+
+    # if request.method == "POST":
+    #     checkInForm = CheckInForm(request.POST)
+    #     if checkInForm.is_valid():
+    #         print('hello')
+    # else:
+    #     checkInForm = CheckInForm()
+    # return render(request, "library/check-in.html", { "form": checkInForm })
 
 def check_out(request):
     if request.method == "POST":
@@ -98,8 +137,8 @@ def check_out(request):
                 print("book with entered ISBN is not in your library")
         else:
             print("form is invalid")
-        print("redirecting to checkOut")
-        return redirect("home")
-    else:
-        checkOutForm = CheckOutForm()
-    return render(request, "library/check-out.html", {"form": checkOutForm})
+    print("redirecting to home")
+    return redirect("home")
+    # else:
+    #     checkOutForm = CheckOutForm()
+    # return render(request, "library/check-out.html", {"form": checkOutForm})
