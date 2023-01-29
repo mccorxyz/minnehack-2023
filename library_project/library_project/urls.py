@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from website.views import home
-from library.views import library, new_book, new_book_isbn, new_book_manual, check_in, check_out, new_user
+# from website.views import home
+from library.views import home, library, new_book, new_book_isbn, new_book_manual, check_in, check_out, new_user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
