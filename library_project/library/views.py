@@ -53,13 +53,20 @@ def new_book_isbn(request):
                     Book(**bookDict).save()
                     messages.info(request, "Added {} to your library".format(bookDict["title"]))
 
+
             return redirect("newBookISBN", )
     else:
         bookForm = ISBNAddBookForm()
-    return render(request, "library/new-book-isbn.html", {"bookForm": bookForm})
+    return render(request, "library/new-book-isbn.html", {"form": bookForm})
 
 def check_in(request):
     return render(request, "library/check-in.html")
 
 def check_out(request):
-    return render(request, "library/check-out.html")
+    if request.method == "POST":
+        checkOutForm = CheckOutForm(request.POST)
+        if checkOutForm.is_valid():
+            print('hello')
+    else:
+        checkOutForm = CheckOutForm()
+    return render(request, "library/check-out.html", {"form": checkOutForm})

@@ -1,23 +1,19 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>New Book Manual Entry</title>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--</body>-->
-<!--</html>-->
-
-
 {% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block title %}New Book{% endblock %}
 
 {% block content %}
+<h1>Add a New Book</h1>
 <form method="post">
-  <table>
-    {{ bookForm }}
-  </table>
   {% csrf_token %}
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Create</button>
+  {% bootstrap_form form %}
+  {% bootstrap_button button_type="submit" content="Submit" %}
 </form>
+{% bootstrap_messages %}
+{% endblock %}
+
+{% block script %}
+var input = document.getElementById('id_isbn');
+input.focus();
+input.select();
 {% endblock %}
