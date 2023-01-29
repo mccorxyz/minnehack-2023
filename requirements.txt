@@ -7,3 +7,4 @@ djangorestframework
 tzdata
 django-extensions
 Werkzeug
+pyOpenSSL
