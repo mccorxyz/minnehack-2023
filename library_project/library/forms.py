@@ -25,7 +25,7 @@ class CheckInForm(forms.Form):
 
 class CheckOutForm(forms.Form):
     card_id = forms.CharField()
-    isbns = forms.CharField()
+    isbn = forms.CharField()
     class Meta:
         fields = ["card_id", "isbn",]
 
