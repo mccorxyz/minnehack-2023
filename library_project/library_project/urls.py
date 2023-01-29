@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 # from website.views import home
-from library.views import MyTableClass, home, library, new_book, new_book_isbn, new_book_manual, check_in, check_out, new_user, user_books
+from library.views import MyTableClass, home, library, new_book, new_book_isbn, new_book_manual, check_in, check_out, new_user, user_books, generate_report
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +29,6 @@ urlpatterns = [
     path('library/check-in', check_in, name="checkIn"),
     path('library/check-out', check_out, name="checkOut"),
     path('library', MyTableClass.as_view(), name="library"),
-    path('library/user-books', user_books, name="userBooks")
+    path('library/user-books', user_books, name="userBooks"),
+    path('library/generate-report', generate_report, name="generateReport"),
 ]
