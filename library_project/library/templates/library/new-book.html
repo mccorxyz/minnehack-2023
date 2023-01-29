@@ -7,31 +7,46 @@ $('#myModal').on('shown.bs.modal', function () {
 	$('#myInput').trigger('focus')
 })
 
+$(document).ready(function(){
+    $("#scanModal").on('shown.bs.modal', function(){
+        $(this).find('#code').focus();
+    });
+});
+
 </script>
 {% block title %}New Book{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'website/background.css' %}">
+<link rel="stylesheet" href="{% static 'website/buttons.css' %}">
 
-<div class="container">
 	<h1 class="text-center">Insert New Book</h1>
 	
-	<div class="row">
 
-		<div class="col text-center">
-			
-			<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#scanModal">Scan</button>
-
-		</div>
-
-		<div class="col text-center">
-			
-			<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#manualModal">Enter Manually</button>
-		</div>
+			<div class="buttonContainer">
+		  <button class="checkOutButton buttons" data-toggle="modal" data-target="#scanModal">
+		    <div class="cornerCircle">
+		      <div class="cornerBook">
+		        <div class="iconTopArrow" style="border-bottom:30px solid blue;"></div>
+		        <div class="iconBottomArrow" style="background-color: blue;"></div>
+		        <div class="bottomIconBox"></div>
+		      </div>
+		    </div>
+		  </button>
+  
 		
-	</div>
+			<button class="returnButton buttons" data-toggle="modal" data-target="#manualModal">
+		    <div class="cornerCircle">
+		      <div class="cornerBook">
+		        <div class="iconTopArrow returnArrow" style="border-bottom:30px solid red;"></div>
+		        <div class="iconBottomArrow returnArrow" style="background-color: red;"></div>
+		        <div class="bottomIconBox"></div>
+		      </div>
+		    </div>
+		  </button>
+		  </div>
 
-</div>
+		
 
 <!-- Scan Modal -->
 <div class="modal fade" id="scanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -44,7 +59,7 @@ $('#myModal').on('shown.bs.modal', function () {
         </button>
       </div>
       <div class="modal-body">
-        <input type="text" class="form-control" placeholder="Scan Id...">
+        <input type="text" class="form-control" placeholder="Scan Id" id="code">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -65,13 +80,40 @@ $('#myModal').on('shown.bs.modal', function () {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
       <div class="modal-body">
-        <input type="text" class="form-control mt-2" placeholder="Title">
-        <input type="text" class="form-control mt-2" placeholder="test">
-        <input type="text" class="form-control mt-2" placeholder="test">
-        <input type="text" class="form-control mt-2" placeholder="test">
-        <input type="text" class="form-control mt-2" placeholder="test">
-        <input type="text" class="form-control mt-2" placeholder="test">
+      	<div class="container">
+      	<div class="row mt-1">
+      		<div class="col-2"><label for="title">Title</label></div>
+      		<div class="col-10"><input type="text" class="form-control" placeholder="" id="title"></div>
+      	</div>
+      	<div class="row mt-1">
+      		<div class="col-2"><label for="title">Title</label></div>
+      		<div class="col-10"><input type="text" class="form-control" placeholder="" id="title"></div>
+
+      	</div>
+   
+      	<div class="row mt-1">
+      		<div class="col-2"><label for="title">Title</label></div>
+      		<div class="col-10"><input type="text" class="form-control" placeholder="" id="title"></div>
+
+      	</div>
+      
+      	<div class="row mt-1">
+      		<div class="col-2"><label for="title">Title</label></div>
+      		<div class="col-10"><input type="text" class="form-control" placeholder="" id="title"></div>
+
+     
+      	</div>
+      	<div class="row mt-1">
+      		<div class="col-2"><label for="title">Title</label></div>
+      		<div class="col-10"><input type="text" class="form-control" placeholder="" id="title"></div>
+
+      	</div>
+      	</div>
+      	
+        
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
