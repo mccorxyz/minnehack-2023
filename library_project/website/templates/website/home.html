@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Welcome to the wonderful Library App</h1>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<link rel="stylesheet" href="{% static 'website/buttons.css' %}">
+<link rel="stylesheet" href="{% static 'website/background.css' %}">
+
+<div class="buttonContainer">
+  <button class="checkOutButton">
+    <div>
+      yea
+    </div>
+  </button>
+  <button class="returnButton">
+    <div>
+      yuh
+    </div>
+  </button>
+</div>
+
+{% endblock %}

@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Return{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'website/background.css' %}">
+
+<div class="container">
+<div class="row">
+	<div class="col-2"></div>
+	<div class="col-8 text-center">
+		
+		<h1>Scan Barcode to Return Book</h1>
+
+		<input type="text" name="barcode" class="form-control" id="barcode">
+
+		<button class="btn btn-primary mt-2" type="button">Submit</button>
+
+	</div>
+	<div class="col-2"></div>
+
+
+</div>
+
+
+</div>
+
+<script type="text/javascript">
+	var input = document.getElementById('barcode');
+input.focus();
+input.select();
+
+
+</script>
+
+
+{% endblock %}
