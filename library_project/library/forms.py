@@ -48,3 +48,11 @@ class ViewUserBooksForm(forms.Form):
     card_id = forms.CharField(label="Library Card Number")
     class Meta:
         fields = ["card_id",]
+
+class UploadFileForm(forms.Form):
+    file = forms.FileField()
+
+class SearchForm(forms.Form):
+    title = forms.CharField(label="Book Title")
+    class Meta:
+        fields = ["query"]

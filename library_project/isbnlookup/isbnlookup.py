@@ -93,6 +93,8 @@ class ISBNLookup:
             m_averageRating = 0
         try:
             m_thumbnail = b_obj["volumeInfo"]["imageLinks"]["thumbnail"]
+            if len(m_thumbnail) == 0:
+                m_thumbnail = b_obj["volumeInfo"]["imageLinks"]["small_thumbnail"]
         except KeyError as e:
             m_thumbnail = ""
         try:

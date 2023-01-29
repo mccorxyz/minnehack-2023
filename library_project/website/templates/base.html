@@ -17,7 +17,7 @@
 <body>
 
   {% block navbar %}
-  <nav class="navbar navbar-expand navbar-light" style="background-color: #6A994E;">
+  <nav class="navbar navbar-expand navbar-light mb-4" style="background-color: #6A994E;">
     <a class="navbar-brand" href="/"><img src="{% static 'website/books3.webp' %}" width="50" height="50"></a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
@@ -44,8 +44,10 @@
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <li><a class="dropdown-item" href="/library">Catalog</a></li>
-            <li><a class="dropdown-item" href="/library/new">Add Books</a></li>
+            <li><a class="dropdown-item" href="/library/search">Search</a></li>
             <li><a class="dropdown-item" href="/">Check In/Out</a></li>
+            <li><a class="dropdown-item" href="/library/new">Add Books</a></li>
+            <li><a class="dropdown-item" href="/library/import-csv">Import CSV</a></li>
           </ul>
         </div>
       </li>
@@ -67,6 +69,9 @@
   <div class="container text-center p-3 justify-content-center">
     <a href="https://github.com/mccorxyz/minnehack-2023">
       <img class="icon" src="{% static 'website/icons/github.svg' %}" height="30" width="30">
+    </a>
+    <a href="https://minnehack.io/" style="margin-right: 10px;">
+      <img src="{% static 'website/minnehack.png' %}" height="30" width="30">
     </a>
     <a href="">
       <img class="icon" src="{% static 'website/icons/code-solid.svg' %}" height="30" width="30">

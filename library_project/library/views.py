@@ -8,6 +8,7 @@ from django_tables2 import SingleTableView, LazyPaginator
 from library.tables import BookTable, UserBookTable, UserTable
 import pandas as pd
 import zipfile
+import time
 
 
 # Create your views here.
@@ -38,7 +39,7 @@ def new_user(request):
                 messages.info(request, "User with Id: {} already exists".format(newUserForm.cleaned_data["card_id"]))
             else:
                 newUserForm.save()
-                messages.info(request, "Added {} to your library".format(newUserForm.cleaned_data["name"]))
+                messages.info(request, "{}'s profile has been created".format(newUserForm.cleaned_data["name"]))
     newUserForm = NewUserForm()
     return render(request, "library/new-user.html", {"form": newUserForm })
 
@@ -180,6 +181,22 @@ def check_out(request):
     print("redirecting to home")
     return redirect("home")
 
+def search_library(request):
+    form = SearchForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            raw = form.cleaned_data['title']
+            query = ''
+            for ch in raw:
+                query += '[' + ch.upper() + ch.lower() + ']'
+            query_regex = r'.*' + query + r'.*'
+            results = Book.objects.filter(title__regex=query_regex)
+            return render(request, "library/search.html", {"form": form,
+                                                           "table": BookTable(results)})
+
+    return render(request, "library/search.html", {"form": SearchForm()})
+
+
 def generate_report(request):
     book_df = pd.DataFrame()
     for mBook in Book.objects.all():
@@ -205,3 +222,66 @@ def generate_report(request):
         archive.write("users.csv")
 
     return FileResponse(open("report.zip", "rb"), as_attachment=True)
+
+def import_csv(request):
+    if request.method == "POST":
+        print("in post method")
+        uploadForm = UploadFileForm(request.POST, request.FILES)
+        print("next")
+        if uploadForm.is_valid():
+            m_file = request.FILES["file"]
+
+            with open('imported_data.csv', 'wb+') as destination:
+                for chunk in m_file.chunks():
+                    destination.write(chunk)
+
+            with open("imported_data.csv", "r") as m_csv:
+                m_csv.readline()
+                m_csv.readline()
+                for line in m_csv:
+                    s_line = line.split(",")
+                    print(s_line[0])
+
+                    print(s_line[4])
+                    if not s_line[4].isnumeric() or int(s_line[4]) > 100:
+                        quantity=1
+                    else:
+                        quantity = s_line[4]
+
+                    isbn = s_line[3]
+                    if not isbn.isnumeric():
+                        m_dict = {"title": s_line[0],
+                                  "authors": s_line[1:3],
+                                  "quantity": quantity,
+                                  }
+                        Book(**m_dict).save()
+                    else:
+                        bookDict = ISBNLookup().lookup(isbn)
+                        time.sleep(.75)
+
+                        if bookDict is None:
+                            bookDict = {"title": s_line[0],
+                                      "authors": s_line[1:3],
+                                      "isbn": isbn,
+                                      "quantity": quantity,
+                                      }
+                        book = Book.objects.filter(isbn=isbn)
+                        if len(book) == 0:
+                            book = Book(**bookDict)
+                            # messages.info(request, "Added {} to your library".format(bookDict["title"]))
+                            book.quantity = 1
+                            book.save()
+                        else:
+                            book[0].quantity += 1
+                            book[0].save()
+                            # messages.info(request,"You now have {} copies of {}".format(book[0].quantity, book[0].title))
+
+
+
+
+                # return redirect(request, "library/import-csv")
+        else:
+            messages.info(request, "Invalid form")
+
+    return render(request, "library/import-csv.html", {"form": UploadFileForm()})
+
