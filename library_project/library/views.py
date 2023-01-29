@@ -42,7 +42,6 @@ def new_book_isbn(request):
                 # Do error
                 messages.info(request, "Error, could not add book")
             else:
-                # print(str(bookDict))
                 existingBookList = Book.objects.filter(isbn=bookForm.cleaned_data["isbn"])
                 if len(existingBookList) > 0:
                     mBook = existingBookList[0]
