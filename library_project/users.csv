@@ -1,0 +1,2 @@
+,_state,id,name,isbns,card_id
+0,<django.db.models.base.ModelState object at 0x7f67e0bca140>,1,jacob,9780132350884,12345

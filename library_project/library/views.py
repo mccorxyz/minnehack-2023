@@ -5,7 +5,7 @@ from .forms import *
 from django.http import FileResponse
 
 from django_tables2 import SingleTableView
-from library.tables import BookTable
+from library.tables import BookTable, UserBookTable
 import pandas as pd
 import zipfile
 
@@ -47,15 +47,17 @@ def user_books(request):
                     mBook = Book.objects.filter(isbn=misbn)[0]
                     mBookList.append(mBook)
 
+                mTable = UserBookTable(mBookList)
 
-                return # TODO add table stuff above here and return
+                return render(request, "library/user-books.html", {"form": userBooksForm,
+                                                                  "table": mTable })
             else:
                 messages.info(request, "User does not exist")
         else:
             print("form is invalid")
 
 
-    return render(request, "library/user-books.html", {"ViewUserBooksForm": ViewUserBooksForm(),})
+    return render(request, "library/user-books.html", {"form": ViewUserBooksForm()})
 
 def library(request):
     return render(request, "library/library.html")

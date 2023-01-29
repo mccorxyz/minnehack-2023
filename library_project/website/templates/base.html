@@ -22,18 +22,31 @@
       <a class="text-dark nav-link" href="/">Bookend</a>
     </div>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      
+
       <li class="nav-item">
-        <a class="nav-link" href="/library" tabindex="-1" aria-disabled="true">Catalog</a>
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            Users
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="/newuser">New User</a></li>
+            <li><a class="dropdown-item" href="/library/user-books">User Books</a></li>
+          </ul>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/library/new">Add Books</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/">Check In/Out</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/newuser">Add User</a>
+      <li>
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">
+            Books
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="/library">Catalog</a></li>
+            <li><a class="dropdown-item" href="/library/new">Add Books</a></li>
+            <li><a class="dropdown-item" href="/">Check In/Out</a></li>
+          </ul>
+        </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/library/generate-report">Generate Report</a>
