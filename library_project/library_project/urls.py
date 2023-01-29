@@ -18,6 +18,7 @@ from django.urls import path
 
 # from website.views import home
 from library.views import MyTableClass, home, library, new_book, new_book_isbn, new_book_manual, check_in, check_out, new_user, user_books, generate_report
+from api.views import post_new_book
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +32,5 @@ urlpatterns = [
     path('library', MyTableClass.as_view(), name="library"),
     path('library/user-books', user_books, name="userBooks"),
     path('library/generate-report', generate_report, name="generateReport"),
+    path('api/book/<str:isbn>', post_new_book, name="postnewbook")
 ]
