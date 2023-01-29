@@ -31,6 +31,28 @@ def new_user(request):
     newUserForm = NewUserForm()
     return render(request, "library/new-user.html", {"form": newUserForm })
 
+def user_books(request):
+    if request.method == "POST":
+        userBooksForm = ViewUserBooksForm(request.POST)
+        if userBooksForm.is_valid():
+            existingUsers = User.objects.filter(card_id=userBooksForm.cleaned_data["card_id"])
+            if len(existingUsers) > 0:
+                mUser = existingUsers[0]
+                mBookList = []
+                for misbn in mUser.isbns:
+                    mBook = Book.objects.filter(isbn=misbn)[0]
+                    mBookList.append(mBook)
+
+
+                return # TODO add table stuff above here and return
+            else:
+                messages.info(request, "User does not exist")
+        else:
+            print("form is invalid")
+
+
+    return render(request, "library/user-books.html", {"ViewUserBooksForm": ViewUserBooksForm(),})
+
 def library(request):
     return render(request, "library/library.html")
 

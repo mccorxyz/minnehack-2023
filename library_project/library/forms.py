@@ -34,6 +34,11 @@ class NewUserForm(ModelForm):
         model = User
         fields = ("name", "card_id")
 
+class ViewUserBooksForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ("card_id",)
+
 # class CheckoutBookForm(ModelForm):
 #     class Meta:
 #         model = User
