@@ -6,7 +6,7 @@ class ImageColumn(tables.Column):
     def render(self, value):
         return format_html('<img src="{}" />', value)
 
-class AuthorColumn(tables.Column):
+class  AuthorColumn(tables.Column):
     def render(self, value):
         res = ''
         for author in value:
