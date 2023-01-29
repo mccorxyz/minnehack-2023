@@ -15,13 +15,11 @@ import time
 class MyTableClass(SingleTableView):
     table_class = BookTable
     queryset = Book.objects.all()
-    paginator_class = LazyPaginator
     template_name = "tables/book-catalog.html"
 
 class UserTableClass(SingleTableView):
     table_class = UserTable
     queryset = User.objects.all()
-    paginator_class = LazyPaginator
     template_name = "tables/user-catalog.html"
 
 def home(request):
