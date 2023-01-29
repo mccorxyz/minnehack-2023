@@ -90,7 +90,6 @@ def new_book_isbn(request):
             bookDict = ISBNLookup().lookup(bookForm.cleaned_data["isbn"])
 
             if bookDict is None:
-                # Do error
                 messages.info(request, "Error, could not add book")
             else:
                 book = Book.objects.filter(isbn=bookForm.cleaned_data["isbn"])
@@ -141,20 +140,6 @@ def check_in(request):
             print("form is invalid")
     print("redirecting to home")
     return redirect("home")
-    # else:
-    #     checkInForm = CheckOutForm()
-    # return render(request, "library/check-in.html", {"form": checkInForm})
-
-
-
-
-    # if request.method == "POST":
-    #     checkInForm = CheckInForm(request.POST)
-    #     if checkInForm.is_valid():
-    #         print('hello')
-    # else:
-    #     checkInForm = CheckInForm()
-    # return render(request, "library/check-in.html", { "form": checkInForm })
 
 def check_out(request):
     if request.method == "POST":
@@ -187,9 +172,6 @@ def check_out(request):
             print("form is invalid")
     print("redirecting to home")
     return redirect("home")
-    # else:
-    #     checkOutForm = CheckOutForm()
-    # return render(request, "library/check-out.html", {"form": checkOutForm})
 
 def generate_report(request):
     book_df = pd.DataFrame()
