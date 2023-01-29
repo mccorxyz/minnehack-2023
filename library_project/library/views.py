@@ -38,7 +38,7 @@ def new_user(request):
                 messages.info(request, "User with Id: {} already exists".format(newUserForm.cleaned_data["card_id"]))
             else:
                 newUserForm.save()
-                messages.info(request, "Added {} to your library".format(newUserForm.cleaned_data["name"]))
+                messages.info(request, "{}'s profile has been created".format(newUserForm.cleaned_data["name"]))
     newUserForm = NewUserForm()
     return render(request, "library/new-user.html", {"form": newUserForm })
 
