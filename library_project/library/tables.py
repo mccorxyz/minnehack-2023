@@ -23,3 +23,14 @@ class BookTable(tables.Table):
                      'class': 'thead-dark'
                  }}
         fields = ("thumbnail", "title", "authors", "quantity")
+
+class UserBookTable(tables.Table):
+    thumbnail = ImageColumn('Thumbernail')
+    authors = AuthorColumn('Authors')
+    class Meta:
+        model = Book
+        attrs = {"class": "table",
+                 'thead': {
+                     'class': 'thead-dark'
+                 }}
+        fields = ("thumbnail", "title", "authors")

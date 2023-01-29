@@ -29,5 +29,5 @@ urlpatterns = [
     path('library/check-in', check_in, name="checkIn"),
     path('library/check-out', check_out, name="checkOut"),
     path('library', MyTableClass.as_view(), name="library"),
-    path('library/user-books', user_books, name="userBooks")
+    path('library/user-books', user_books, name="userBooks"),
 ]
