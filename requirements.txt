@@ -2,3 +2,4 @@ Django
 django-bootstrap5
 django-tables2
 pandas
+psycopg2-binary
