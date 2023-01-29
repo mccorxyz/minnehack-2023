@@ -59,7 +59,7 @@ $(document).ready(function(){
         </button>
       </div>
       <div class="modal-body">
-		  <form method="post" class="form">
+		  <form method="post" action="/library/check-out" class="form">
 			  {% csrf_token %}
 			  {% bootstrap_form checkInForm %}
 			  <div class="modal-footer">
@@ -83,7 +83,7 @@ $(document).ready(function(){
       </div>
 
       <div class="modal-body">
-      	<form method="post" class="form">
+      	<form method="post" action="/library/check-in" class="form">
 			  {% csrf_token %}
 			  {% bootstrap_form checkOutForm %}
 	  	</form>
