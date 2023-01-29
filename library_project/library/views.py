@@ -18,10 +18,10 @@ def new_book_isbn(request):
             # ISBNLookup().lookup(bookForm.cleaned_data["isbn"])
             messages.info(request, "Adding book!")
             # bookForm.save()
-            return redirect("library", )
+            return redirect("newBookISBN", )
     else:
         bookForm = ISBNAddBookForm()
-    return render(request, "library/new-book-isbn.html", {"bookForm": bookForm})
+    return render(request, "library/new-book-isbn.html", {"form": bookForm})
 
 def check_in(request):
     return render(request, "library/check-in.html")

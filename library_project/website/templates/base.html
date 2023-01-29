@@ -2,8 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{% block title %}Title{% endblock %}</title>
-
+  <title>{% block title %}{% endblock %}</title>
+  {% load django_bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
   <link rel="stylesheet" href="{% static 'website/background.css' %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -45,4 +47,8 @@
 </ul>
 {% endif %}
 </body>
+<script type="text/javascript">
+  {% block script %}
+  {% endblock %}
+</script>
 </html>
