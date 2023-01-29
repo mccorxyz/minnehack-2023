@@ -7,6 +7,8 @@ from django.http import FileResponse
 from django_tables2 import SingleTableView
 from library.tables import BookTable, UserBookTable
 import pandas as pd
+import zipfile
+
 
 # Create your views here.
 class MyTableClass(SingleTableView):
@@ -193,25 +195,21 @@ def generate_report(request):
 
     user_df = pd.DataFrame()
     for mUser in User.objects.all():
-        # mBookList = []
-        print(mUser.name)
-        for misbn in mUser.isbns:
-            mBook = Book.objects.filter(isbn=misbn)[0]
-            user_df = pd.concat([user_df, pd.DataFrame.from_dict(mUser.__dict__)])
-            # mBookList.append(mBook)
 
-    print(user_df)
+        for index, misbn in enumerate(mUser.isbns):
+            mBook = Book.objects.filter(isbn=misbn)[0]
+            temp_df = pd.DataFrame.from_dict({"name": [mUser.name], "card_id": [mUser.card_id], "title": [mBook.title]})
+            print(temp_df)
+            user_df = pd.concat([user_df, temp_df])
+
 
     f_book_df = book_df.filter(items=["title", "authors", "publisher", "publishedDate", "quantity"])
-
     f_book_df.to_csv("all_books.csv")
+    print(user_df)
     user_df.to_csv("users.csv")
-
-    import zipfile
 
     with zipfile.ZipFile("report.zip", mode="w") as archive:
         archive.write("all_books.csv")
         archive.write("users.csv")
 
     return FileResponse(open("report.zip", "rb"), as_attachment=True)
-    # return FileResponse(open("output.csv", "rb"), as_attachment=True)
