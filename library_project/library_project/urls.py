@@ -29,6 +29,6 @@ urlpatterns = [
     path('library/new/isbn', new_book_isbn, name="newBookISBN"),
     path('library/check-in', check_in, name="checkIn"),
     path('library/check-out', check_out, name="checkOut"),
-    path('table', MyTableClass.as_view(), name="singletableview")
+    path('table', MyTableClass.as_view(), name="singletableview"),
     path('library/user-books', user_books, name="userBooks")
 ]
