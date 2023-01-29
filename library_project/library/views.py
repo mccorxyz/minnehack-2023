@@ -55,7 +55,13 @@ def new_book_isbn(request):
     return redirect("newBook", )
 
 def check_in(request):
-    return render(request, "library/check-in.html")
+    if request.method == "POST":
+        checkInForm = CheckInForm(request.POST)
+        if checkInForm.is_valid():
+            print('hello')
+    else:
+        checkInForm = CheckInForm()
+    return render(request, "library/check-in.html", { "form": checkInForm })
 
 def check_out(request):
     if request.method == "POST":

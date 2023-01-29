@@ -2,6 +2,7 @@
 
 {% extends "base.html" %}
 {% load static %}
+{% load django_bootstrap5 %}
 {% block title %}Return{% endblock %}
 
 {% block content %}
@@ -14,9 +15,11 @@
 		
 		<h1>Scan Barcode to Return Book</h1>
 
-		<input type="text" name="barcode" class="form-control" id="barcode">
-
-		<button class="btn btn-primary mt-2" type="button">Submit</button>
+		<form method="post">
+			{% csrf_token %}
+			{% bootstrap_form form %}
+		  	{% bootstrap_button button_type="submit" content="Submit" %}
+		</form>
 
 	</div>
 	<div class="col-2"></div>
@@ -28,7 +31,7 @@
 </div>
 
 <script type="text/javascript">
-	var input = document.getElementById('barcode');
+var input = document.getElementById('barcode');
 input.focus();
 input.select();
 
