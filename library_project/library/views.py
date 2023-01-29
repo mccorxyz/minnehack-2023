@@ -3,7 +3,15 @@ from isbnlookup.isbnlookup import ISBNLookup
 from django.contrib import messages
 from .forms import *
 
+from django_tables2 import SingleTableView
+from library.tables import BookTable
+
 # Create your views here.
+class MyTableClass(SingleTableView):
+    table_class = BookTable
+    queryset = Book.objects.all()
+    template_name = "tables/table.html"
+
 def home(request):
     checkInForm = CheckInForm()
     checkOutForm = CheckOutForm()
