@@ -61,7 +61,7 @@ $(document).ready(function(){
       <div class="modal-body">
 		  <form method="post" action="/library/check-out" class="form">
 			  {% csrf_token %}
-			  {% bootstrap_form checkInForm %}
+			  {% bootstrap_form checkOutForm %}
 			  <div class="modal-footer">
 			  {% bootstrap_button button_type="submit" content="Submit" %}
 			  </div>

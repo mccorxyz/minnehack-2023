@@ -83,21 +83,33 @@ def check_out(request):
     if request.method == "POST":
         checkOutForm = CheckOutForm(request.POST)
         if checkOutForm.is_valid():
+            print("form is valid")
             print(checkOutForm.cleaned_data["card_id"])
-            print(checkOutForm.cleaned_data["isbns"][0])
-            desiredBookList = Book.objects.filter(isbn=checkOutForm.cleaned_data["isbns"][0])
+            print(checkOutForm.cleaned_data["isbn"])
+            desiredBookList = Book.objects.filter(isbn=checkOutForm.cleaned_data["isbn"])
+            print("desiredBookList: {}".format(desiredBookList))
             if len(desiredBookList) > 0:
-                userList = User.objects.filter(card_id=checkOutForm.cleaned_data["card_id"])
-                if len(userList) > 0:
-                    userList.isbns += checkOutForm.cleaned_data["isbns"]
-                    userList.save()
-                    messages.info(request, "Checkout out {} to {}".format(desiredBookList[0]["title"], userList[0]["name"]))
+                if desiredBookList[0].quantity > 0:
+                    userList = User.objects.filter(card_id=checkOutForm.cleaned_data["card_id"])
+                    if len(userList) > 0:
+                        userList[0].isbns += [checkOutForm.cleaned_data["isbn"]]
+                        userList[0].save()
+                        desiredBookList[0].quantity -= 1
+                        desiredBookList[0].save()
+                        messages.info(request, "Checkout {} to {}".format(desiredBookList[0].title, userList[0].name))
+                        print("Checkout {} to {}".format(desiredBookList[0].title, userList[0].name))
+                    else:
+                        messages.info(request, "Invalid card id")
+                        print("invalid card id")
                 else:
-                    messages.info(request, "Invalid card id")
-
+                    messages.info(request, "All copies of {} are already checked out".format(desiredBookList[0].title))
             else:
                 messages.info(request, "Book with entered ISBN is not in your library")
-        return redirect("checkOut")
+                print("book with entered ISBN is not in your library")
+        else:
+            print("form is invalid")
+        print("redirecting to checkOut")
+        return redirect("home")
     else:
         checkOutForm = CheckOutForm()
     return render(request, "library/check-out.html", {"form": checkOutForm})
