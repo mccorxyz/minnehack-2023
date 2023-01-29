@@ -8,6 +8,7 @@ from django_tables2 import SingleTableView, LazyPaginator
 from library.tables import BookTable, UserBookTable, UserTable
 import pandas as pd
 import zipfile
+import time
 
 
 # Create your views here.
@@ -256,6 +257,7 @@ def import_csv(request):
                         Book(**m_dict).save()
                     else:
                         bookDict = ISBNLookup().lookup(isbn)
+                        time.sleep(.75)
 
                         if bookDict is None:
                             bookDict = {"title": s_line[0],

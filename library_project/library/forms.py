@@ -50,7 +50,6 @@ class ViewUserBooksForm(forms.Form):
         fields = ["card_id",]
 
 class UploadFileForm(forms.Form):
-    title = forms.CharField(max_length=50)
     file = forms.FileField()
 
 class SearchForm(forms.Form):
