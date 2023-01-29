@@ -1,46 +1,43 @@
 # minnehack-2023
 Project for Minnehack 2023
 
-## Useful commands
+## Inspiration
+_Bookend_ was inspired by Corey's wife, who happens to be a school teacher. She has hundreds of books that she borrows her students, which requires traceability as to which students have checked out which books.
 
-python -m pip install django
+Before _Bookend_, the system in place was a simple web page that used a Google Sheets spreadsheet to track all of the books!
 
-django-admin startproject meeting_planner
+_Bookend_ is the much needed successor, providing a robust system for book tracking and putting an **end** to Google Sheet back-ends!
 
-cd meeting_planner/
+## What it does
+_Bookend_ utilizes a handheld bar code scanner to scan book ISBN bar codes to add and track books for your personal library.
 
-python manage.py startapp website
+_Bookend_ can:
+  - Manage your library
+  - Search books by title or ISBN
+  - Track which books users have checked-out
+  - Export your library and users as a .csv
+  - Scan books with your mobile phone to add books to your library
+  - Automatically gather book metadata when ISBN is provided
 
-### Run the webserver
-```python manage.py runserver```
+## How we built it
+We built the _Bookend_ website using **Django**, a python web framework. We chose Django, because it takes care of much of the database and data-layer automagically, allowing developers to focus on the user experience, rather than how the data flows through the system.
 
-## Migrations
+We also chose to build a cross-platform mobile  companion app using **Flutter**, so that users without a bar code scanners could still easily add books to their library.
 
-python manage.py showmigrations
+During the early phases of development, we leveraged **Figma** to create UI mock-ups of _Bookend_ to quickly determine which UI/UX choices would benefit our user the most. These mock-ups led to a design with large buttons and text, perfect for touch devices, in case the user would like to create their own _Bookend_ kiosk.
 
-python manage.py migrate
+Since not every developer is familiar with Python and Django, we built a **Docker** image that can easily be deployed with a single command!
 
-**After creating/updating a new model**
-python manage.py makemigrations
+## Challenges we ran into
+The team had a limited knowledge of Django coming into this competition. We were all also pretty rusty on our CSS. What seemed to be trivial things like centering elements and navbar/footer placement ended up being more difficult than anticipated.
 
-**See generated SQL**
-python manage.py sqlmigrate meetings 0001
+We attempted to add SSL to our public server using Let's Encrypt, but after toying with it for a while it become a low priority for us.
 
-**SQL shell**
-python manage.py dbshell
+## Accomplishments that we're proud of
+We're proud that we were able to put together a project like this with a new framework (to us at least). None of us would consider ourselves professional web developers, but given the knowledge and time limitations, we are very happy with the end result.
 
-**Model fields**
-https://docs.djangoproject.com/en/4.1/ref/models/fields/
+## What we learned
+We learned that when we all start to get tired, it helps to begin pair programming, as it allows for one person to focus on code, while the other person can better grasp the problem being tackled.
 
-### Migration workflow
-1. Change model code
-2. Generate migration script (check it!)
-    - `python manage.py makemigrations`
-3. Optional: show Migrations
-    - `python manage.py showmigraitons`
-4. Run Migrations
-    - `python manage.py migrate`
-
-### Useful Colors
-
-https://coolors.co/386641-6a994e-a7c957-f2e8cf-bc4749
+## What's next for Bookend
+Corey plans to deploy an instance of _Bookend_ for his wife, who has already gotten great use out of the previous prototype!
