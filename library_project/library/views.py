@@ -4,7 +4,7 @@ from django.contrib import messages
 from .forms import *
 from django.http import FileResponse
 
-from django_tables2 import SingleTableView
+from django_tables2 import SingleTableView, LazyPaginator
 from library.tables import BookTable, UserBookTable, UserTable
 import pandas as pd
 import zipfile
@@ -14,11 +14,13 @@ import zipfile
 class MyTableClass(SingleTableView):
     table_class = BookTable
     queryset = Book.objects.all()
+    paginator_class = LazyPaginator
     template_name = "tables/book-catalog.html"
 
 class UserTableClass(SingleTableView):
     table_class = UserTable
     queryset = User.objects.all()
+    paginator_class = LazyPaginator
     template_name = "tables/user-catalog.html"
 
 def home(request):
