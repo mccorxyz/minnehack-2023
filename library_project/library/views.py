@@ -38,7 +38,7 @@ def new_user(request):
                 messages.info(request, "User with Id: {} already exists".format(newUserForm.cleaned_data["card_id"]))
             else:
                 newUserForm.save()
-                messages.info(request, "Added {} to your library".format(newUserForm.cleaned_data["name"]))
+                messages.info(request, "{}'s profile has been created".format(newUserForm.cleaned_data["name"]))
     newUserForm = NewUserForm()
     return render(request, "library/new-user.html", {"form": newUserForm })
 
@@ -179,6 +179,22 @@ def check_out(request):
             print("form is invalid")
     print("redirecting to home")
     return redirect("home")
+
+def search_library(request):
+    form = SearchForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            raw = form.cleaned_data['title']
+            query = ''
+            for ch in raw:
+                query += '[' + ch.upper() + ch.lower() + ']'
+            query_regex = r'.*' + query + r'.*'
+            results = Book.objects.filter(title__regex=query_regex)
+            return render(request, "library/search.html", {"form": form,
+                                                           "table": BookTable(results)})
+
+    return render(request, "library/search.html", {"form": SearchForm()})
+
 
 def generate_report(request):
     book_df = pd.DataFrame()

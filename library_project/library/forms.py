@@ -52,3 +52,8 @@ class ViewUserBooksForm(forms.Form):
 class UploadFileForm(forms.Form):
     title = forms.CharField(max_length=50)
     file = forms.FileField()
+
+class SearchForm(forms.Form):
+    title = forms.CharField(label="Book Title")
+    class Meta:
+        fields = ["query"]
